@@ -1,9 +1,11 @@
+// The code first prompts the user to input the student's marks
 const prompt = require('prompt-sync')();
 const input = function () {
     console.log("Enter student's marks.");
     return parseFloat(prompt());
 }
-
+/* This is a function that determines which grade 
+the student gets depending on their marks*/
 const Marks = input();
 function Grade(Marks) {
     if (Marks >79 && Marks <= 100){
