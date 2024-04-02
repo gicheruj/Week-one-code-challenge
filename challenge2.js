@@ -1,18 +1,31 @@
-// The code first prompts the user to input the speed of the car
-const prompt = require('prompt-sync')();
-const input = function () {
-    console.log("Enter speed of the car.");
-    return parseFloat(prompt());
+// Here the code imports readline and creates an interface for it to work
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+// This part prompts the user to input the speed of the car
+function input(callback) {
+  rl.question("Enter speed of the car: ", (speed) => {
+    callback(parseFloat(speed));
+  });
 }
-// This is a function that calculates the demerit points.
-const speed = input();
+// This part of the code calculates the demerit points if the driver is overspeeding
 function demeritPoints(speed) {
-    if (speed <= 70) {
-        console.log("Ok");
-    }else if (speed > 70) {
-        const excessiveSpeed = speed - 70;
-        const points = excessiveSpeed/5;
-        console.log(points);
+  if (speed <= 70) {
+    console.log("Ok");
+  } else if (speed > 70) {
+    const excessiveSpeed = speed - 70;
+    const points = excessiveSpeed / 5;
+    console.log(points);
+    if (points > 12) {
+      console.log("License suspended!!");
     }
+  }
 }
-demeritPoints(speed);
+
+input((speed) => {
+  demeritPoints(speed);
+  rl.close();
+});
